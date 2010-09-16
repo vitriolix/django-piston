@@ -52,6 +52,7 @@ class BaseHandler(object):
     exclude = ( 'id', )
     fields =  ( )
 
+    # fixme --- this should be a static method
     def flatten_dict(self, dct):
         return dict([ (str(k), dct.get(k)) for k in dct.keys() ])
 
