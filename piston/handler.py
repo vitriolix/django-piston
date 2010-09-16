@@ -52,7 +52,7 @@ class BaseHandler(object):
     exclude = ( 'id', )
     fields =  ( )
 
-    # fixme --- this should be a static method
+    @staticmethod
     def flatten_dict(self, dct):
         return dict([ (str(k), dct.get(k)) for k in dct.keys() ])
 
@@ -62,6 +62,7 @@ class BaseHandler(object):
     def queryset(self, request):
         return self.model.objects.all()
 
+    @staticmethod
     def value_from_tuple(tu, name):
         for int_, n in tu:
             if n == name:
