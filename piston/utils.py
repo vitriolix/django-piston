@@ -224,7 +224,13 @@ class Mimer(object):
         """
         type_formencoded = "application/x-www-form-urlencoded"
 
-        ctype = self.request.META.get('CONTENT_TYPE', type_formencoded)
+        # Applied patch from Bug #121 thread
+        # http://bitbucket.org/jespern/django-piston/issue/121/content-type-is-not-being-split-against
+
+        # Caused some issues with Firefox + jQuery appending UTF
+        # encoding onto the XHR request
+        ctype = self.request.META.get('CONTENT_TYPE',
+                type_formencoded).split(";")[0]
 
         if type_formencoded in ctype:
             return None
